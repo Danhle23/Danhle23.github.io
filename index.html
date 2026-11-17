@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lê Thanh Danh — Embedded Systems, Digital IC (SystemVerilog) & IIoT Engineer</title>
+  <meta name="description" content="Engineering Portfolio of Lê Thanh Danh (Danhle23) — Electronics & Telecommunications Engineering at VNUHCM-University of Science. SystemVerilog AMBA APB3 RTL, Zero-Heap Embedded C++17 IIoT, MATLAB Numerical Computing & AI Automation." />
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-hover: #172033;
+      --border: #1f2937;
+      --accent: #38bdf8;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--sans);
+      background: radial-gradient(circle at 15% 0%, #0f1b33 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+    header {
+      padding: 64px 0 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .bio {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 26px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 8px;
+      font-size: 0.92rem; font-weight: 600;
+      text-decoration: none; transition: all 0.18s ease;
+    }
+    .btn-primary {
+      background: var(--accent); color: #06121e;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-outline {
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); background: var(--surface-hover); }
+
+    section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+    .sec-title {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    h2 { font-size: 1.65rem; margin-bottom: 24px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      transform: translateY(-2px);
+    }
+    .card-top { margin-bottom: 18px; }
+    .card-domain {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent-amber);
+      margin-bottom: 6px;
+    }
+    .card h3 { font-size: 1.18rem; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      padding: 3px 8px;
+      border-radius: 5px;
+      background: rgba(148, 163, 184, 0.1);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .card-link {
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .card-link:hover { text-decoration: underline; }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .stack-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .stack-box h4 {
+      font-size: 0.96rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .stack-box p {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    footer {
+      padding: 32px 0 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="status-pill">
+        <span class="dot"></span>
+        Open to R&amp;D Internships (Digital IC / Embedded / IIoT) &amp; Technical Consulting
+      </div>
+      <h1>Lê Thanh Danh</h1>
+      <div class="subtitle">Electronics &amp; Telecommunications Engineering · VNUHCM – University of Science (HCMUS)</div>
+      <p class="bio">
+        Junior hardware–software systems engineer building across the silicon-to-cloud stack: synthesizable
+        <strong>SystemVerilog AMBA APB3 IP cores</strong> with automated EDA verification, deterministic
+        <strong>zero-heap Embedded C++17 RS485/Modbus-RTU</strong> industrial gateways,
+        <strong>MATLAB OOP numerical solvers</strong>, and high-throughput telemetry platforms.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub (@Danhle23)</a>
+        <a class="btn btn-outline" href="mailto:danhle2305@gmail.com">danhle2305@gmail.com</a>
+        <a class="btn btn-outline" href="https://github.com/Danhle23/uart-controller" target="_blank" rel="noopener">APB3 UART Silicon IP</a>
+        <a class="btn btn-outline" href="https://github.com/Danhle23/iiot-modbus-edge-gateway" target="_blank" rel="noopener">IIoT Modbus C++17 Gateway</a>
+      </div>
+    </header>
+
+    <section>
+      <div class="sec-title">01 // Flagship Engineering Repositories</div>
+      <h2>Hardware, Firmware &amp; Systems Portfolio</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div class="card-domain">DIGITAL IC DESIGN &amp; RTL VERIFICATION</div>
+            <h3>AMBA APB3 UART SoC Peripheral IP Core</h3>
+            <p>
+              Synthesizable SystemVerilog SoC peripheral featuring dual 16×8 synchronous TX/RX FIFOs,
+              2-FF CDC synchronizer, mid-bit oversampling, runtime baud divider, hardware parity/framing/overrun
+              W1C status registers, IRQ generation, and automated Verilator + Icarus Verilog CI.
+            </p>
+            <div class="tags">
+              <span class="tag">SystemVerilog</span>
+              <span class="tag">AMBA APB3</span>
+              <span class="tag">Sync FIFO</span>
+              <span class="tag">Verilator Lint</span>
+              <span class="tag">BFM Testbench</span>
+            </div>
+          </div>
+          <a class="card-link" href="https://github.com/Danhle23/uart-controller" target="_blank" rel="noopener">Inspect RTL &amp; CI →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="card-domain">EMBEDDED C++17 &amp; INDUSTRIAL AUTOMATION</div>
+            <h3>IIoT RS485 / Modbus-RTU Edge Gateway</h3>
+            <p>
+              Zero-dynamic-allocation Embedded C++17 telemetry engine for retrofitting 3-phase switchgear
+              and cold-storage PLCs. Implements compile-time constexpr CRC-16, lock-free SPSC DMA ring buffer,
+              EMI noise-resilient frame parser, and debounced phase-loss/thermal fault alarms.
+            </p>
+            <div class="tags">
+              <span class="tag">C++17 Zero-Heap</span>
+              <span class="tag">Modbus-RTU / RS485</span>
+              <span class="tag">Lock-Free SPSC</span>
+              <span class="tag">STM32 / ESP32</span>
+              <span class="tag">MQTT JSON</span>
+            </div>
+          </div>
+          <a class="card-link" href="https://github.com/Danhle23/iiot-modbus-edge-gateway" target="_blank" rel="noopener">Inspect Firmware &amp; Tests →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="card-domain">SCIENTIFIC COMPUTING &amp; DSP / NUMERICAL METHODS</div>
+            <h3>MATLAB Numerical Computing Studio</h3>
+            <p>
+              6-Tab OOP desktop workbench (<code>matlab.apps.AppBase</code>) integrating 16 standalone numerical
+              solvers (Newton-Raphson, Adaptive Banach, Barycentric Lagrange, O(h⁴) Stencils, Simpson 1/3 &amp; 3/8)
+              verified across 25/25 automated precision benchmarks.
+            </p>
+            <div class="tags">
+              <span class="tag">MATLAB R2026a</span>
+              <span class="tag">OOP AppBase</span>
+              <span class="tag">16 Solvers</span>
+              <span class="tag">10⁻¹⁵ Precision</span>
+            </div>
+          </div>
+          <a class="card-link" href="https://github.com/Danhle23/DoAn-PhuongPhapTinh-MATLAB" target="_blank" rel="noopener">Inspect Solver Architecture →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="card-domain">FULL-STACK DATA TELEMETRY &amp; AI WORKFLOWS</div>
+            <h3>GiaThat Telemetry &amp; Agentic Engineering Tooling</h3>
+            <p>
+              Time-series e-commerce price-anomaly detection platform built with TypeScript, Next.js, and Prisma,
+              paired with custom CLI/AI automation pipelines for rapid datasheet verification and code synthesis.
+            </p>
+            <div class="tags">
+              <span class="tag">TypeScript</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">Python / Shell</span>
+            </div>
+          </div>
+          <a class="card-link" href="https://github.com/Danhle23/giathat" target="_blank" rel="noopener">Inspect Platform →</a>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">02 // Core Engineering Matrix</div>
+      <h2>Technical Capabilities</h2>
+      <div class="stack-grid">
+        <div class="stack-box">
+          <h4>Digital IC &amp; Hardware Design</h4>
+          <p>SystemVerilog (IEEE 1800-2012), Verilog, AMBA APB3, Synchronous FIFOs, FSMs, CDC Synchronizers, Verilator, Icarus Verilog, GTKWave, LTspice, KiCad PCB.</p>
+        </div>
+        <div class="stack-box">
+          <h4>Embedded &amp; Industrial IoT</h4>
+          <p>Embedded C, Modern C++17 (Zero-Heap), STM32, ESP32, FreeRTOS, UART, SPI, I2C, RS485 / Modbus-RTU, Lock-Free Ring Buffers, MQTT Telemetry.</p>
+        </div>
+        <div class="stack-box">
+          <h4>Signal, Math &amp; Software</h4>
+          <p>MATLAB (App Designer OOP, DSP, Numerical Analysis), Python (NumPy, OpenCV), TypeScript/Next.js, Linux/macOS CLI, Git &amp; GitHub Actions CI.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built &amp; maintained by <strong>Lê Thanh Danh</strong> · VNUHCM – University of Science · Ho Chi Minh City, Vietnam
+    </footer>
+  </div>
+</body>
+</html>
