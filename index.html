@@ -1,306 +1,951 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="paper">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lê Thanh Danh — Embedded Systems, Digital IC (SystemVerilog) & IIoT Engineer</title>
-  <meta name="description" content="Engineering Portfolio of Lê Thanh Danh (Danhle23) — Electronics & Telecommunications Engineering at VNUHCM-University of Science. SystemVerilog AMBA APB3 RTL, Zero-Heap Embedded C++17 IIoT, MATLAB Numerical Computing & AI Automation." />
+  <title>Lê Thanh Danh — Digital IC, Embedded C++ &amp; Industrial Systems</title>
+  <meta name="description" content="Lê Thanh Danh — Electronics & Telecommunications Engineering at VNUHCM-University of Science. SystemVerilog RTL (AMBA APB3), Zero-Heap Embedded C++17, RS485/Modbus-RTU, and Numerical Computing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #090d16;
-      --surface: #111827;
-      --surface-hover: #172033;
-      --border: #1f2937;
-      --accent: #38bdf8;
-      --accent-green: #10b981;
-      --accent-amber: #f59e0b;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    :root, [data-theme="paper"] {
+      --bg: #f6f5f0;
+      --panel: #efede6;
+      --surface: #fbfaf7;
+      --ink: #141413;
+      --ink-2: #4a4945;
+      --muted: #78766f;
+      --line: #d8d5cc;
+      --signal: #c84b31;
+      --ok: #1f6f43;
+      --trace-hi: #141413;
+      --trace-fill: rgba(20, 20, 19, 0.045);
     }
+    [data-theme="carbon"] {
+      --bg: #121211;
+      --panel: #191917;
+      --surface: #151514;
+      --ink: #eceae3;
+      --ink-2: #b5b2a8;
+      --muted: #7d7a72;
+      --line: #2a2926;
+      --signal: #e06348;
+      --ok: #4ca973;
+      --trace-hi: #eceae3;
+      --trace-fill: rgba(236, 234, 227, 0.05);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: var(--sans);
-      background: radial-gradient(circle at 15% 0%, #0f1b33 0%, var(--bg) 55%);
-      color: var(--text);
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.58;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.15s ease, color 0.15s ease;
     }
-    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-    header {
-      padding: 64px 0 44px;
-      border-bottom: 1px solid var(--border);
-    }
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--accent-green);
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 5px 12px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-    }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
-    }
-    h1 {
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .subtitle {
-      font-size: 1.15rem;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .bio {
-      max-width: 780px;
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 26px;
-    }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 18px; border-radius: 8px;
-      font-size: 0.92rem; font-weight: 600;
-      text-decoration: none; transition: all 0.18s ease;
-    }
-    .btn-primary {
-      background: var(--accent); color: #06121e;
-    }
-    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .btn-outline {
-      background: var(--surface); color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--accent); background: var(--surface-hover); }
 
-    section { padding: 48px 0; border-bottom: 1px solid var(--border); }
-    .sec-title {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    h2 { font-size: 1.65rem; margin-bottom: 24px; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 20px;
-    }
-    .card {
+    .sheet {
+      max-width: 920px;
+      margin: 0 auto;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      min-height: 100vh;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+    }
+    @media (max-width: 940px) {
+      .sheet { border-left: none; border-right: none; }
+    }
+
+    /* Top architectural bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12.5px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13.5px;
+    }
+    .brand-coord {
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.12s ease;
+    }
+    .nav a:hover { color: var(--signal); }
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      padding: 3px 8px;
+      cursor: pointer;
+    }
+    .theme-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* Hero / Intro Grid */
+    .intro {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .intro-main {
+      padding: 36px 28px 34px 24px;
+      border-right: 1px solid var(--line);
+    }
+    .intro-main h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .intro-lead {
+      color: var(--ink-2);
+      font-size: 14.8px;
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 52ch;
+    }
+    .intro-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 12.5px;
+    }
+    .intro-links a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      font-weight: 500;
+    }
+    .intro-links a:hover {
+      color: var(--signal);
+      border-color: var(--signal);
+    }
+
+    .spec-table {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--line);
+      gap: 10px;
+      align-items: baseline;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-k {
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+    }
+    .spec-v { color: var(--ink); word-break: break-word; }
+    .spec-v a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+    .spec-v a:hover { color: var(--signal); }
+
+    @media (max-width: 720px) {
+      .intro { grid-template-columns: 1fr; }
+      .intro-main { border-right: none; border-bottom: 1px solid var(--line); padding: 28px 20px; }
+      .topbar { padding: 12px 20px; }
+      .spec-row { padding: 9px 20px; }
+    }
+
+    /* Section Headers */
+    .sec-bar {
+      display: flex;
       justify-content: space-between;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      align-items: center;
+      padding: 10px 24px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
     }
-    .card:hover {
-      border-color: rgba(56, 189, 248, 0.55);
-      transform: translateY(-2px);
+    @media (max-width: 720px) {
+      .sec-bar { padding: 10px 20px; }
     }
-    .card-top { margin-bottom: 18px; }
-    .card-domain {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent-amber);
+
+    /* Interactive Bench */
+    .bench {
+      border-bottom: 1px solid var(--line);
+    }
+    .bench-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+    .bench-tab {
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--line);
+      padding: 10px 18px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .bench-tab.active {
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 500;
+      box-shadow: inset 0 -2px 0 var(--signal);
+    }
+    .bench-body { padding: 20px 24px 22px; }
+    @media (max-width: 720px) { .bench-body { padding: 16px 20px 18px; } }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+    }
+    .ctrl-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ctrl-label { color: var(--muted); font-size: 11px; }
+    .hex-input, .mode-select {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+    .hex-input { width: 68px; text-transform: uppercase; }
+    .preset-btn {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .preset-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+    .wave-wrap {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 12px 10px 8px;
+      overflow-x: auto;
+    }
+    .wave-svg {
+      display: block;
+      width: 100%;
+      min-width: 560px;
+      height: 128px;
+    }
+    .reg-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: var(--ink-2);
+    }
+    .reg-strip code { color: var(--ink); font-weight: 500; }
+
+    /* Modbus Bench */
+    .slider-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .slider-box {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+    .slider-head {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: 6px;
     }
-    .card h3 { font-size: 1.18rem; margin-bottom: 10px; }
-    .card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 14px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.73rem;
-      padding: 3px 8px;
-      border-radius: 5px;
-      background: rgba(148, 163, 184, 0.1);
-      color: #cbd5e1;
-      border: 1px solid rgba(148, 163, 184, 0.18);
+    .slider-box input[type="range"] {
+      width: 100%;
+      accent-color: var(--signal);
     }
-    .card-link {
-      font-family: var(--mono);
-      font-size: 0.84rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .card-link:hover { text-decoration: underline; }
-
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .stack-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px;
-    }
-    .stack-box h4 {
-      font-size: 0.96rem;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .stack-box p {
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      color: var(--muted);
+    .frame-box {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 12px 14px;
+      font-size: 12px;
       line-height: 1.7;
+      overflow-x: auto;
     }
-    footer {
-      padding: 32px 0 48px;
-      text-align: center;
+    .crc-hi { color: var(--signal); font-weight: 500; }
+    .state-ok { color: var(--ok); font-weight: 500; }
+    .state-fault { color: var(--signal); font-weight: 500; }
+
+    /* Project Specification Rows */
+    .proj-list { border-bottom: 1px solid var(--line); }
+    .proj-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .proj-item:last-child { border-bottom: none; }
+    .proj-idx {
+      padding: 24px 0 24px 24px;
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 12px;
     }
+    .proj-content {
+      padding: 22px 24px 24px 8px;
+    }
+    .proj-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .proj-title {
+      font-size: 16.5px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    .proj-title a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .proj-title a:hover { color: var(--signal); }
+    .proj-meta {
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .proj-desc {
+      color: var(--ink-2);
+      font-size: 14px;
+      margin-bottom: 12px;
+      max-width: 68ch;
+    }
+    .proj-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .proj-specs span::before {
+      content: "▪ ";
+      color: var(--ink-2);
+    }
+    .proj-preview {
+      margin-top: 12px;
+    }
+    .proj-preview summary {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11.5px;
+      color: var(--ink-2);
+      cursor: pointer;
+      user-select: none;
+    }
+    .proj-preview summary:hover { color: var(--signal); }
+    .proj-preview img {
+      margin-top: 10px;
+      width: 100%;
+      max-width: 640px;
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    @media (max-width: 720px) {
+      .proj-item { grid-template-columns: 1fr; }
+      .proj-idx { padding: 18px 20px 0; }
+      .proj-content { padding: 6px 20px 20px; }
+    }
+
+    /* Technical Notes / Stack Table */
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .matrix-col {
+      padding: 20px 24px;
+      border-right: 1px solid var(--line);
+    }
+    .matrix-col:last-child { border-right: none; }
+    .matrix-col h3 {
+      font-size: 12px;
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .matrix-col ul {
+      list-style: none;
+      font-size: 13.2px;
+      color: var(--ink-2);
+    }
+    .matrix-col li {
+      padding: 3px 0;
+    }
+    @media (max-width: 720px) {
+      .matrix { grid-template-columns: 1fr; }
+      .matrix-col { border-right: none; border-bottom: 1px solid var(--line); padding: 18px 20px; }
+      .matrix-col:last-child { border-bottom: none; }
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--ink-2); text-decoration: none; }
+    footer a:hover { color: var(--signal); }
+    @media (max-width: 720px) { footer { padding: 16px 20px; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="status-pill">
-        <span class="dot"></span>
-        Open to R&amp;D Internships (Digital IC / Embedded / IIoT) &amp; Technical Consulting
+  <div class="sheet">
+    <header class="topbar mono">
+      <div class="brand">
+        <a href="#" class="brand-name">Lê Thanh Danh</a>
+        <span class="brand-coord">10.7626° N, 106.6824° E · HCMUS</span>
       </div>
-      <h1>Lê Thanh Danh</h1>
-      <div class="subtitle">Electronics &amp; Telecommunications Engineering · VNUHCM – University of Science (HCMUS)</div>
-      <p class="bio">
-        Junior hardware–software systems engineer building across the silicon-to-cloud stack: synthesizable
-        <strong>SystemVerilog AMBA APB3 IP cores</strong> with automated EDA verification, deterministic
-        <strong>zero-heap Embedded C++17 RS485/Modbus-RTU</strong> industrial gateways,
-        <strong>MATLAB OOP numerical solvers</strong>, and high-throughput telemetry platforms.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub (@Danhle23)</a>
-        <a class="btn btn-outline" href="mailto:danhle2305@gmail.com">danhle2305@gmail.com</a>
-        <a class="btn btn-outline" href="https://github.com/Danhle23/uart-controller" target="_blank" rel="noopener">APB3 UART Silicon IP</a>
-        <a class="btn btn-outline" href="https://github.com/Danhle23/iiot-modbus-edge-gateway" target="_blank" rel="noopener">IIoT Modbus C++17 Gateway</a>
-      </div>
+      <nav class="nav">
+        <a href="#work">Index</a>
+        <a href="#bench">Timing Bench</a>
+        <a href="#stack">Disciplines</a>
+        <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">CV.pdf ↗</a>
+        <a href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub ↗</a>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch color scheme">CARBON</button>
+      </nav>
     </header>
 
-    <section>
-      <div class="sec-title">01 // Flagship Engineering Repositories</div>
-      <h2>Hardware, Firmware &amp; Systems Portfolio</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-top">
-            <div class="card-domain">DIGITAL IC DESIGN &amp; RTL VERIFICATION</div>
-            <h3>AMBA APB3 UART SoC Peripheral IP Core</h3>
-            <p>
-              Synthesizable SystemVerilog SoC peripheral featuring dual 16×8 synchronous TX/RX FIFOs,
-              2-FF CDC synchronizer, mid-bit oversampling, runtime baud divider, hardware parity/framing/overrun
-              W1C status registers, IRQ generation, and automated Verilator + Icarus Verilog CI.
-            </p>
-            <div class="tags">
-              <span class="tag">SystemVerilog</span>
-              <span class="tag">AMBA APB3</span>
-              <span class="tag">Sync FIFO</span>
-              <span class="tag">Verilator Lint</span>
-              <span class="tag">BFM Testbench</span>
-            </div>
-          </div>
-          <a class="card-link" href="https://github.com/Danhle23/uart-controller" target="_blank" rel="noopener">Inspect RTL &amp; CI →</a>
-        </article>
-
-        <article class="card">
-          <div class="card-top">
-            <div class="card-domain">EMBEDDED C++17 &amp; INDUSTRIAL AUTOMATION</div>
-            <h3>IIoT RS485 / Modbus-RTU Edge Gateway</h3>
-            <p>
-              Zero-dynamic-allocation Embedded C++17 telemetry engine for retrofitting 3-phase switchgear
-              and cold-storage PLCs. Implements compile-time constexpr CRC-16, lock-free SPSC DMA ring buffer,
-              EMI noise-resilient frame parser, and debounced phase-loss/thermal fault alarms.
-            </p>
-            <div class="tags">
-              <span class="tag">C++17 Zero-Heap</span>
-              <span class="tag">Modbus-RTU / RS485</span>
-              <span class="tag">Lock-Free SPSC</span>
-              <span class="tag">STM32 / ESP32</span>
-              <span class="tag">MQTT JSON</span>
-            </div>
-          </div>
-          <a class="card-link" href="https://github.com/Danhle23/iiot-modbus-edge-gateway" target="_blank" rel="noopener">Inspect Firmware &amp; Tests →</a>
-        </article>
-
-        <article class="card">
-          <div class="card-top">
-            <div class="card-domain">SCIENTIFIC COMPUTING &amp; DSP / NUMERICAL METHODS</div>
-            <h3>MATLAB Numerical Computing Studio</h3>
-            <p>
-              6-Tab OOP desktop workbench (<code>matlab.apps.AppBase</code>) integrating 16 standalone numerical
-              solvers (Newton-Raphson, Adaptive Banach, Barycentric Lagrange, O(h⁴) Stencils, Simpson 1/3 &amp; 3/8)
-              verified across 25/25 automated precision benchmarks.
-            </p>
-            <div class="tags">
-              <span class="tag">MATLAB R2026a</span>
-              <span class="tag">OOP AppBase</span>
-              <span class="tag">16 Solvers</span>
-              <span class="tag">10⁻¹⁵ Precision</span>
-            </div>
-          </div>
-          <a class="card-link" href="https://github.com/Danhle23/DoAn-PhuongPhapTinh-MATLAB" target="_blank" rel="noopener">Inspect Solver Architecture →</a>
-        </article>
-
-        <article class="card">
-          <div class="card-top">
-            <div class="card-domain">FULL-STACK DATA TELEMETRY &amp; AI WORKFLOWS</div>
-            <h3>GiaThat Telemetry &amp; Agentic Engineering Tooling</h3>
-            <p>
-              Time-series e-commerce price-anomaly detection platform built with TypeScript, Next.js, and Prisma,
-              paired with custom CLI/AI automation pipelines for rapid datasheet verification and code synthesis.
-            </p>
-            <div class="tags">
-              <span class="tag">TypeScript</span>
-              <span class="tag">Next.js</span>
-              <span class="tag">Prisma</span>
-              <span class="tag">Python / Shell</span>
-            </div>
-          </div>
-          <a class="card-link" href="https://github.com/Danhle23/giathat" target="_blank" rel="noopener">Inspect Platform →</a>
-        </article>
+    <section class="intro">
+      <div class="intro-main">
+        <h1>Digital IC, Embedded Firmware &amp; Industrial Telemetry.</h1>
+        <p class="intro-lead">
+          Third-year Electronics &amp; Telecommunications student at VNUHCM – University of Science.
+          I write synthesizable SystemVerilog RTL peripherals, deterministic zero-heap C++17 firmware
+          for noisy RS485/Modbus buses, and numerical simulation tools.
+        </p>
+        <div class="intro-links mono">
+          <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">Read Resume (1-Page PDF)</a>
+          <a href="https://github.com/Danhle23" target="_blank" rel="noopener">github.com/Danhle23</a>
+          <a href="mailto:danhle2305@gmail.com">danhle2305@gmail.com</a>
+        </div>
       </div>
-    </section>
 
-    <section>
-      <div class="sec-title">02 // Core Engineering Matrix</div>
-      <h2>Technical Capabilities</h2>
-      <div class="stack-grid">
-        <div class="stack-box">
-          <h4>Digital IC &amp; Hardware Design</h4>
-          <p>SystemVerilog (IEEE 1800-2012), Verilog, AMBA APB3, Synchronous FIFOs, FSMs, CDC Synchronizers, Verilator, Icarus Verilog, GTKWave, LTspice, KiCad PCB.</p>
+      <div class="spec-table mono">
+        <div class="spec-row">
+          <span class="spec-k">Affiliation</span>
+          <span class="spec-v">VNUHCM – Univ. of Science</span>
         </div>
-        <div class="stack-box">
-          <h4>Embedded &amp; Industrial IoT</h4>
-          <p>Embedded C, Modern C++17 (Zero-Heap), STM32, ESP32, FreeRTOS, UART, SPI, I2C, RS485 / Modbus-RTU, Lock-Free Ring Buffers, MQTT Telemetry.</p>
+        <div class="spec-row">
+          <span class="spec-k">Department</span>
+          <span class="spec-v">Electronics &amp; Telecom (2024–2028)</span>
         </div>
-        <div class="stack-box">
-          <h4>Signal, Math &amp; Software</h4>
-          <p>MATLAB (App Designer OOP, DSP, Numerical Analysis), Python (NumPy, OpenCV), TypeScript/Next.js, Linux/macOS CLI, Git &amp; GitHub Actions CI.</p>
+        <div class="spec-row">
+          <span class="spec-k">Primary HDL</span>
+          <span class="spec-v">SystemVerilog (IEEE 1800-2012)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-k">Firmware</span>
+          <span class="spec-v">C / C++17 · STM32 · ESP-IDF · RTOS</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-k">Base</span>
+          <span class="spec-v">Ho Chi Minh City, Vietnam</span>
         </div>
       </div>
     </section>
 
-    <footer>
-      Built &amp; maintained by <strong>Lê Thanh Danh</strong> · VNUHCM – University of Science · Ho Chi Minh City, Vietnam
+    <!-- Interactive Hardware Verification Workbench -->
+    <div class="sec-bar mono" id="bench">
+      <span>Interactive Hardware Bench</span>
+      <span>Cycle &amp; Wire-Level Inspection</span>
+    </div>
+    <section class="bench">
+      <div class="bench-tabs">
+        <button class="bench-tab active" data-pane="uart" type="button">01 / apb_uart.sv — Serial Frame &amp; Mid-Bit Strobe</button>
+        <button class="bench-tab" data-pane="modbus" type="button">02 / modbus_rtu.hpp — RS485 CRC-16 &amp; Phase Monitor</button>
+      </div>
+
+      <!-- Pane 1: UART Logic Analyzer -->
+      <div class="bench-body" id="pane-uart">
+        <div class="controls-row mono">
+          <div class="ctrl-group">
+            <span class="ctrl-label">TXDATA[7:0]:</span>
+            <input id="uartHex" class="hex-input" type="text" value="0x5A" maxlength="4" />
+          </div>
+          <div class="ctrl-group">
+            <span class="ctrl-label">CTRL Framing:</span>
+            <select id="uartParity" class="mode-select">
+              <option value="none">8N1 (Parity Off)</option>
+              <option value="even" selected>8E1 (Even Parity)</option>
+              <option value="odd">8O1 (Odd Parity)</option>
+            </select>
+          </div>
+          <button class="preset-btn" data-byte="0x5A" type="button">0x5A ('Z')</button>
+          <button class="preset-btn" data-byte="0x44" type="button">0x44 ('D')</button>
+          <button class="preset-btn" data-byte="0xA5" type="button">0xA5</button>
+          <button class="preset-btn" data-byte="0x81" type="button">0x81</button>
+        </div>
+
+        <div class="wave-wrap">
+          <svg id="uartSvg" class="wave-svg" viewBox="0 0 760 128" preserveAspectRatio="none"></svg>
+        </div>
+
+        <div class="reg-strip mono">
+          <span id="uartRegReadout">APB 0x00 TXDATA = <code>0x5A</code> · LSB-first wire order: <code>0 1 0 1 1 0 1 0</code></span>
+          <span>▲ Marks <code>uart_rx.sv</code> mid-bit sample strobe (<code>clk_cnt == DIV/2</code>)</span>
+        </div>
+      </div>
+
+      <!-- Pane 2: Modbus CRC-16 & Fault Latch -->
+      <div class="bench-body" id="pane-modbus" style="display:none;">
+        <div class="slider-grid mono">
+          <div class="slider-box">
+            <div class="slider-head"><span>Phase A (Va)</span><strong id="valVa">221.5 V</strong></div>
+            <input id="slVa" type="range" min="0" max="250" step="0.5" value="221.5" />
+          </div>
+          <div class="slider-box">
+            <div class="slider-head"><span>Phase C (Vc)</span><strong id="valVc">220.0 V</strong></div>
+            <input id="slVc" type="range" min="0" max="250" step="0.5" value="220.0" />
+          </div>
+          <div class="slider-box">
+            <div class="slider-head"><span>Cold Vault Temp</span><strong id="valTemp">-18.0 °C</strong></div>
+            <input id="slTemp" type="range" min="-25" max="5" step="0.5" value="-18.0" />
+          </div>
+        </div>
+
+        <div class="frame-box mono">
+          <div>RS485 RX Wire Hex (Slave <code>0x01</code>, FC <code>0x03</code>, CRC-16/MODBUS <code>0xA001</code>):</div>
+          <div id="modbusHexLine" style="margin: 4px 0 8px; font-size: 13px;"></div>
+          <div id="modbusFaultLine"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selected Engineering Index -->
+    <div class="sec-bar mono" id="work">
+      <span>Selected Engineering Work</span>
+      <span>RTL · Firmware · Numerical Systems</span>
+    </div>
+    <section class="proj-list">
+      <article class="proj-item">
+        <div class="proj-idx mono">01</div>
+        <div class="proj-content">
+          <div class="proj-head">
+            <h2 class="proj-title">
+              <a href="https://github.com/Danhle23/uart-controller" target="_blank" rel="noopener">
+                AMBA APB3 UART SoC Peripheral IP Core ↗
+              </a>
+            </h2>
+            <span class="proj-meta mono">SystemVerilog · Verilator &amp; Icarus CI</span>
+          </div>
+          <p class="proj-desc">
+            Synthesizable memory-mapped UART slave peripheral for microcontroller interconnects.
+            Pairs deterministic TX/RX state machines (2-flop metastability synchronizer, false-start glitch rejection,
+            mid-bit sampling) with dual 16×8 circular FIFOs, programmable 16-bit baud divider, W1C parity/framing/overrun
+            status flags, and maskable interrupt output.
+          </p>
+          <div class="proj-specs mono">
+            <span>Zero-wait-state APB3 slave (0x00–0x14)</span>
+            <span>Dual 16×8 sync FIFOs</span>
+            <span>Verilator -Wall clean</span>
+            <span>Automated GitHub Actions EDA regression</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj-item">
+        <div class="proj-idx mono">02</div>
+        <div class="proj-content">
+          <div class="proj-head">
+            <h2 class="proj-title">
+              <a href="https://github.com/Danhle23/iiot-modbus-edge-gateway" target="_blank" rel="noopener">
+                Zero-Heap RS485 / Modbus-RTU Edge Gateway ↗
+              </a>
+            </h2>
+            <span class="proj-meta mono">Embedded C++17 · Industrial Telemetry</span>
+          </div>
+          <p class="proj-desc">
+            Deterministic C++17 firmware engine built to retrofit legacy 3-phase switchgear and cold-storage PLCs without
+            dynamic memory allocation. Uses a compile-time <code>constexpr</code> CRC-16 lookup table in ROM, an atomic
+            lock-free SPSC ring buffer for UART DMA interrupts, sliding-window EMI noise recovery, and 3-sample debounced fault latching.
+          </p>
+          <div class="proj-specs mono">
+            <span>0 bytes heap allocation (no malloc/new)</span>
+            <span>Lock-free SPSC DMA queue</span>
+            <span>24/24 strict -Werror unit checks</span>
+            <span>Python virtual PLC harness</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj-item">
+        <div class="proj-idx mono">03</div>
+        <div class="proj-content">
+          <div class="proj-head">
+            <h2 class="proj-title">
+              <a href="https://github.com/Danhle23/DoAn-PhuongPhapTinh-MATLAB" target="_blank" rel="noopener">
+                Numerical Analysis &amp; Simulation Studio ↗
+              </a>
+            </h2>
+            <span class="proj-meta mono">MATLAB R2026a · OOP AppBase</span>
+          </div>
+          <p class="proj-desc">
+            Desktop scientific workbench separating UI controllers from 16 standalone numerical algorithms:
+            Newton-Raphson, adaptive Banach fixed-point, Barycentric Lagrange interpolation, multi-model least squares,
+            O(h⁴) finite-difference stencils, and composite Simpson 1/3 &amp; 3/8 integration.
+          </p>
+          <div class="proj-specs mono">
+            <span>16 decoupled solver modules</span>
+            <span>25/25 automated verification checks</span>
+            <span>10⁻¹⁵ analytical benchmark agreement</span>
+          </div>
+          <details class="proj-preview">
+            <summary>[+] Inspect MATLAB Workbench Interface</summary>
+            <img src="./assets/matlab_studio.png" alt="MATLAB Numerical Computing Studio interface" loading="lazy" />
+          </details>
+        </div>
+      </article>
+
+      <article class="proj-item">
+        <div class="proj-idx mono">04</div>
+        <div class="proj-content">
+          <div class="proj-head">
+            <h2 class="proj-title">
+              <a href="https://github.com/Danhle23/giathat" target="_blank" rel="noopener">
+                GiaThat — Price Time-Series Anomaly Tracker ↗
+              </a>
+            </h2>
+            <span class="proj-meta mono">TypeScript · Next.js · Prisma</span>
+          </div>
+          <p class="proj-desc">
+            Web telemetry tool that ingests e-commerce pricing histories to flag artificial pre-sale markups
+            and visualize real discount baselines over time.
+          </p>
+          <div class="proj-specs mono">
+            <span>Time-series ingestion pipeline</span>
+            <span>Synthetic markup detection</span>
+            <span>Responsive chart views</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Disciplines & Tooling -->
+    <div class="sec-bar mono" id="stack">
+      <span>Technical Disciplines</span>
+      <span>Laboratory &amp; Software Stack</span>
+    </div>
+    <section class="matrix">
+      <div class="matrix-col">
+        <h3>Silicon &amp; Circuit</h3>
+        <ul>
+          <li>SystemVerilog (IEEE 1800-2012)</li>
+          <li>AMBA APB3 &amp; Synchronous FIFOs</li>
+          <li>FSMs &amp; 2-FF CDC Synchronizers</li>
+          <li>Verilator, Icarus Verilog, GTKWave</li>
+          <li>LTspice &amp; KiCad Schematic/PCB</li>
+        </ul>
+      </div>
+      <div class="matrix-col">
+        <h3>Embedded &amp; Fieldbus</h3>
+        <ul>
+          <li>Embedded C &amp; Zero-Heap C++17</li>
+          <li>STM32 (HAL/LL) &amp; ESP32 (ESP-IDF)</li>
+          <li>FreeRTOS Tasks, Queues &amp; Watchdog</li>
+          <li>UART, SPI, I2C, RS485 / Modbus-RTU</li>
+          <li>Lock-Free Ring Buffers &amp; MQTT</li>
+        </ul>
+      </div>
+      <div class="matrix-col">
+        <h3>Math, DSP &amp; Tooling</h3>
+        <ul>
+          <li>MATLAB (OOP App Designer, DSP)</li>
+          <li>Python (NumPy, OpenCV, PySerial)</li>
+          <li>TypeScript, Next.js, Prisma ORM</li>
+          <li>Linux / macOS Shell, Make, Git</li>
+          <li>GitHub Actions Automated CI</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="mono">
+      <span>Lê Thanh Danh · Ho Chi Minh City</span>
+      <span>
+        <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
+        <a href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="mailto:danhle2305@gmail.com">Email</a>
+      </span>
     </footer>
   </div>
+
+  <script>
+    // 1. Paper / Carbon Theme Switch
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      const saved = localStorage.getItem("danh_theme");
+      if (saved === "carbon" || saved === "paper") {
+        root.setAttribute("data-theme", saved);
+      }
+      function syncLabel() {
+        const cur = root.getAttribute("data-theme");
+        btn.textContent = cur === "paper" ? "CARBON" : "PAPER";
+      }
+      syncLabel();
+      btn.addEventListener("click", function () {
+        const next = root.getAttribute("data-theme") === "paper" ? "carbon" : "paper";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("danh_theme", next);
+        syncLabel();
+        renderUartWaveform();
+      });
+    })();
+
+    // 2. Bench Tab Switching
+    document.querySelectorAll(".bench-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        document.querySelectorAll(".bench-tab").forEach(function (t) { t.classList.remove("active"); });
+        tab.classList.add("active");
+        const target = tab.getAttribute("data-pane");
+        document.getElementById("pane-uart").style.display = target === "uart" ? "block" : "none";
+        document.getElementById("pane-modbus").style.display = target === "modbus" ? "block" : "none";
+      });
+    });
+
+    // 3. Cycle-Accurate UART Waveform Renderer
+    function parseHexByte(raw) {
+      const clean = raw.trim().replace(/^0x/i, "");
+      const val = parseInt(clean, 16);
+      if (Number.isNaN(val)) return 0x5A;
+      return Math.max(0, Math.min(255, val));
+    }
+
+    function renderUartWaveform() {
+      const svg = document.getElementById("uartSvg");
+      const byteVal = parseHexByte(document.getElementById("uartHex").value);
+      const parityMode = document.getElementById("uartParity").value;
+
+      const bits = [];
+      bits.push({ label: "IDLE", v: 1, sample: false });
+      bits.push({ label: "START", v: 0, sample: true });
+
+      let ones = 0;
+      const lsbList = [];
+      for (let i = 0; i < 8; i++) {
+        const b = (byteVal >> i) & 1;
+        ones += b;
+        lsbList.push(b);
+        bits.push({ label: "D" + i, v: b, sample: true });
+      }
+
+      let ctrlHex = "0x03";
+      if (parityMode === "even") {
+        bits.push({ label: "PAR(E)", v: ones % 2, sample: true });
+        ctrlHex = "0x07";
+      } else if (parityMode === "odd") {
+        bits.push({ label: "PAR(O)", v: (ones % 2) ^ 1, sample: true });
+        ctrlHex = "0x0F";
+      }
+
+      bits.push({ label: "STOP", v: 1, sample: true });
+      bits.push({ label: "IDLE", v: 1, sample: false });
+
+      const styles = getComputedStyle(document.documentElement);
+      const ink = styles.getPropertyValue("--trace-hi").trim() || "#141413";
+      const muted = styles.getPropertyValue("--muted").trim() || "#78766f";
+      const line = styles.getPropertyValue("--line").trim() || "#d8d5cc";
+      const signal = styles.getPropertyValue("--signal").trim() || "#c84b31";
+
+      const W = 760;
+      const padL = 56;
+      const padR = 14;
+      const slotW = (W - padL - padR) / bits.length;
+      const yHi = 52;
+      const yLo = 92;
+
+      let out = "";
+      // Signal labels
+      out += `<text x="8" y="25" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">PCLK</text>`;
+      out += `<text x="8" y="76" fill="${ink}" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500">TXD</text>`;
+
+      // Sub-clock ticks along top
+      let clkPath = `M ${padL} 28 `;
+      const totalSubClks = bits.length * 4;
+      const subW = (W - padL - padR) / totalSubClks;
+      for (let c = 0; c < totalSubClks; c++) {
+        const x0 = padL + c * subW;
+        const xMid = x0 + subW * 0.5;
+        const x1 = x0 + subW;
+        clkPath += `L ${x0.toFixed(1)} 16 L ${xMid.toFixed(1)} 16 L ${xMid.toFixed(1)} 28 L ${x1.toFixed(1)} 28 `;
+      }
+      out += `<path d="${clkPath}" fill="none" stroke="${muted}" stroke-width="1" opacity="0.55"/>`;
+
+      // Bit guides + TXD digital waveform
+      let path = "";
+      for (let i = 0; i < bits.length; i++) {
+        const x0 = padL + i * slotW;
+        const x1 = x0 + slotW;
+        const xm = (x0 + x1) / 2;
+        const y = bits[i].v ? yHi : yLo;
+
+        out += `<line x1="${x0.toFixed(1)}" y1="38" x2="${x0.toFixed(1)}" y2="116" stroke="${line}" stroke-width="1" stroke-dasharray="2,2"/>`;
+
+        if (i === 0) {
+          path += `M ${x0.toFixed(1)} ${y} L ${x1.toFixed(1)} ${y} `;
+        } else {
+          const prevY = bits[i - 1].v ? yHi : yLo;
+          if (prevY !== y) path += `L ${x0.toFixed(1)} ${y} `;
+          path += `L ${x1.toFixed(1)} ${y} `;
+        }
+
+        // Bit header & logic level
+        out += `<text x="${xm.toFixed(1)}" y="45" text-anchor="middle" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="9.5">${bits[i].label}</text>`;
+        if (bits[i].label.startsWith("D") || bits[i].label.startsWith("PAR")) {
+          out += `<text x="${xm.toFixed(1)}" y="${bits[i].v ? yHi + 15 : yLo - 7}" text-anchor="middle" fill="${ink}" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="500">${bits[i].v}</text>`;
+        }
+
+        // Mid-bit RX sample marker
+        if (bits[i].sample) {
+          out += `<polygon points="${xm.toFixed(1)},100 ${(xm - 3.5).toFixed(1)},108 ${(xm + 3.5).toFixed(1)},108" fill="${signal}"/>`;
+        }
+      }
+
+      out += `<path d="${path}" fill="none" stroke="${ink}" stroke-width="2"/>`;
+      svg.innerHTML = out;
+
+      const hexStr = "0x" + byteVal.toString(16).toUpperCase().padStart(2, "0");
+      const ascii = (byteVal >= 32 && byteVal <= 126) ? ` ('${String.fromCharCode(byteVal)}')` : "";
+      document.getElementById("uartRegReadout").innerHTML =
+        `APB 0x00 TXDATA = <code>${hexStr}</code>${ascii} · 0x0C CTRL = <code>${ctrlHex}</code> · LSB-first: <code>${lsbList.join(" ")}</code>`;
+    }
+
+    document.getElementById("uartHex").addEventListener("input", renderUartWaveform);
+    document.getElementById("uartParity").addEventListener("change", renderUartWaveform);
+    document.querySelectorAll(".preset-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.getElementById("uartHex").value = b.getAttribute("data-byte");
+        renderUartWaveform();
+      });
+    });
+
+    // 4. Modbus-RTU CRC-16 (0xA001) & Fault Monitor Live Calculator
+    function crc16Modbus(bytes) {
+      let crc = 0xFFFF;
+      for (let i = 0; i < bytes.length; i++) {
+        crc ^= bytes[i];
+        for (let b = 0; b < 8; b++) {
+          crc = (crc & 1) ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
+        }
+      }
+      return crc & 0xFFFF;
+    }
+
+    function toInt16Bytes(val) {
+      const v = val < 0 ? (0x10000 + val) : val;
+      return [(v >> 8) & 0xFF, v & 0xFF];
+    }
+
+    function renderModbus() {
+      const va = parseFloat(document.getElementById("slVa").value);
+      const vc = parseFloat(document.getElementById("slVc").value);
+      const vb = 220.0;
+      const temp = parseFloat(document.getElementById("slTemp").value);
+
+      document.getElementById("valVa").textContent = va.toFixed(1) + " V";
+      document.getElementById("valVc").textContent = vc.toFixed(1) + " V";
+      document.getElementById("valTemp").textContent = temp.toFixed(1) + " °C";
+
+      const regs = [
+        Math.round(va * 10),
+        Math.round(vb * 10),
+        Math.round(vc * 10),
+        Math.round(temp * 10)
+      ];
+      const frame = [0x01, 0x03, 0x08];
+      regs.forEach(function (r) {
+        const pair = toInt16Bytes(r);
+        frame.push(pair[0], pair[1]);
+      });
+      const crc = crc16Modbus(frame);
+      const crcLo = crc & 0xFF;
+      const crcHi = (crc >> 8) & 0xFF;
+
+      const bodyHex = frame.map(function (x) { return x.toString(16).toUpperCase().padStart(2, "0"); }).join(" ");
+      const crcHex = `<span class="crc-hi">${crcLo.toString(16).toUpperCase().padStart(2, "0")} ${crcHi.toString(16).toUpperCase().padStart(2, "0")}</span>`;
+      document.getElementById("modbusHexLine").innerHTML = `${bodyHex} ${crcHex}  <span style="color:var(--muted)">(CRC-16 Little-Endian)</span>`;
+
+      const flags = [];
+      if (Math.min(va, vb, vc) < 175.0) flags.push("PHASE_LOSS (<175V)");
+      if (Math.max(va, vb, vc) - Math.min(va, vb, vc) > 25.0) flags.push("PHASE_ASYMMETRY (>25V)");
+      if (temp > -12.0) flags.push("THERMAL_EXCURSION (>-12°C)");
+
+      const faultEl = document.getElementById("modbusFaultLine");
+      if (flags.length === 0) {
+        faultEl.innerHTML = `Status: <span class="state-ok">NOMINAL (fault_mask = 0x00)</span> · MQTT <code>{"alarm":false}</code>`;
+      } else {
+        faultEl.innerHTML = `Status: <span class="state-fault">ALARM LATCHED → ${flags.join(" | ")}</span> · MQTT <code>{"alarm":true}</code>`;
+      }
+    }
+
+    ["slVa", "slVc", "slTemp"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", renderModbus);
+    });
+
+    renderUartWaveform();
+    renderModbus();
+  </script>
 </body>
 </html>
