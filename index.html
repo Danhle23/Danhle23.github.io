@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lê Thanh Danh — Digital IC, Embedded C++ &amp; Industrial Systems</title>
-  <meta name="description" content="Lê Thanh Danh — Electronics & Telecommunications Engineering at VNUHCM-University of Science. SystemVerilog RTL (AMBA APB3), Zero-Heap Embedded C++17, RS485/Modbus-RTU, and Numerical Computing." />
+  <meta name="description" content="Engineering Portfolio of Lê Thanh Danh (Danhle23) — Electronics & Telecommunications (Control & Automation), VNUHCM-University of Science. SystemVerilog AMBA APB3 RTL, Zero-Heap Embedded C++17 IIoT, Custom C++17 Systems & MATLAB Numerical Solvers." />
+  <meta property="og:title" content="Lê Thanh Danh — Digital IC, Embedded C++ &amp; Industrial Systems" />
+  <meta property="og:description" content="SystemVerilog AMBA APB3 SoC IP, Zero-Heap C++17 RS485/Modbus-RTU Telemetry, ASan-Verified C++17 Engines &amp; Interactive Hardware Timing Bench." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://danhle23.github.io/" />
+  <meta property="og:image" content="https://danhle23.github.io/assets/matlab_studio.png" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -20,7 +26,6 @@
       --signal: #c84b31;
       --ok: #1f6f43;
       --trace-hi: #141413;
-      --trace-fill: rgba(20, 20, 19, 0.045);
     }
     [data-theme="carbon"] {
       --bg: #121211;
@@ -33,7 +38,6 @@
       --signal: #e06348;
       --ok: #4ca973;
       --trace-hi: #eceae3;
-      --trace-fill: rgba(236, 234, 227, 0.05);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,18 +51,17 @@
       -webkit-font-smoothing: antialiased;
       transition: background 0.15s ease, color 0.15s ease;
     }
-
     .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
 
     .sheet {
-      max-width: 920px;
+      max-width: 940px;
       margin: 0 auto;
       border-left: 1px solid var(--line);
       border-right: 1px solid var(--line);
       min-height: 100vh;
       background: var(--surface);
     }
-    @media (max-width: 940px) {
+    @media (max-width: 960px) {
       .sheet { border-left: none; border-right: none; }
     }
 
@@ -73,11 +76,7 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .brand {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
+    .brand { display: flex; align-items: baseline; gap: 10px; }
     .brand-name {
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -85,14 +84,11 @@
       text-decoration: none;
       font-size: 13.5px;
     }
-    .brand-coord {
-      color: var(--muted);
-      font-size: 11.5px;
-    }
+    .brand-coord { color: var(--muted); font-size: 11.5px; }
     .nav {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 15px;
       flex-wrap: wrap;
     }
     .nav a {
@@ -101,7 +97,7 @@
       transition: color 0.12s ease;
     }
     .nav a:hover { color: var(--signal); }
-    .theme-btn {
+    .util-btn {
       background: transparent;
       border: 1px solid var(--line);
       color: var(--ink-2);
@@ -110,7 +106,7 @@
       padding: 3px 8px;
       cursor: pointer;
     }
-    .theme-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .util-btn:hover { border-color: var(--ink); color: var(--ink); }
 
     /* Hero / Intro Grid */
     .intro {
@@ -123,10 +119,10 @@
       border-right: 1px solid var(--line);
     }
     .intro-main h1 {
-      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      font-size: clamp(1.62rem, 3.1vw, 2.2rem);
       font-weight: 600;
       letter-spacing: -0.03em;
-      line-height: 1.15;
+      line-height: 1.16;
       margin-bottom: 14px;
     }
     .intro-lead {
@@ -134,12 +130,13 @@
       font-size: 14.8px;
       line-height: 1.65;
       margin-bottom: 20px;
-      max-width: 52ch;
+      max-width: 54ch;
     }
     .intro-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      align-items: center;
+      gap: 14px 18px;
       font-size: 12.5px;
     }
     .intro-links a {
@@ -149,10 +146,17 @@
       padding-bottom: 1px;
       font-weight: 500;
     }
-    .intro-links a:hover {
-      color: var(--signal);
-      border-color: var(--signal);
+    .intro-links a:hover { color: var(--signal); border-color: var(--signal); }
+    .copy-btn {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink-2);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      cursor: pointer;
     }
+    .copy-btn:hover { border-color: var(--ink); color: var(--ink); }
 
     .spec-table {
       display: flex;
@@ -162,7 +166,7 @@
     }
     .spec-row {
       display: grid;
-      grid-template-columns: 96px 1fr;
+      grid-template-columns: 98px 1fr;
       padding: 10px 20px;
       border-bottom: 1px solid var(--line);
       gap: 10px;
@@ -176,17 +180,15 @@
       letter-spacing: 0.06em;
     }
     .spec-v { color: var(--ink); word-break: break-word; }
-    .spec-v a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
-    .spec-v a:hover { color: var(--signal); }
 
-    @media (max-width: 720px) {
+    @media (max-width: 740px) {
       .intro { grid-template-columns: 1fr; }
-      .intro-main { border-right: none; border-bottom: 1px solid var(--line); padding: 28px 20px; }
+      .intro-main { border-right: none; border-bottom: 1px solid var(--line); padding: 26px 20px; }
       .topbar { padding: 12px 20px; }
       .spec-row { padding: 9px 20px; }
     }
 
-    /* Section Headers */
+    /* Section Bars */
     .sec-bar {
       display: flex;
       justify-content: space-between;
@@ -199,14 +201,10 @@
       letter-spacing: 0.08em;
       color: var(--muted);
     }
-    @media (max-width: 720px) {
-      .sec-bar { padding: 10px 20px; }
-    }
+    @media (max-width: 740px) { .sec-bar { padding: 10px 20px; } }
 
     /* Interactive Bench */
-    .bench {
-      border-bottom: 1px solid var(--line);
-    }
+    .bench { border-bottom: 1px solid var(--line); }
     .bench-tabs {
       display: flex;
       border-bottom: 1px solid var(--line);
@@ -216,9 +214,9 @@
       background: transparent;
       border: none;
       border-right: 1px solid var(--line);
-      padding: 10px 18px;
+      padding: 10px 16px;
       font-family: "IBM Plex Mono", monospace;
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--muted);
       cursor: pointer;
       white-space: nowrap;
@@ -230,7 +228,7 @@
       box-shadow: inset 0 -2px 0 var(--signal);
     }
     .bench-body { padding: 20px 24px 22px; }
-    @media (max-width: 720px) { .bench-body { padding: 16px 20px 18px; } }
+    @media (max-width: 740px) { .bench-body { padding: 16px 20px 18px; } }
 
     .controls-row {
       display: flex;
@@ -240,11 +238,7 @@
       margin-bottom: 14px;
       font-size: 12px;
     }
-    .ctrl-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .ctrl-group { display: inline-flex; align-items: center; gap: 6px; }
     .ctrl-label { color: var(--muted); font-size: 11px; }
     .hex-input, .mode-select {
       background: var(--bg);
@@ -289,7 +283,6 @@
     }
     .reg-strip code { color: var(--ink); font-weight: 500; }
 
-    /* Modbus Bench */
     .slider-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -302,15 +295,8 @@
       padding: 10px 12px;
       font-size: 12px;
     }
-    .slider-head {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-    .slider-box input[type="range"] {
-      width: 100%;
-      accent-color: var(--signal);
-    }
+    .slider-head { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .slider-box input[type="range"] { width: 100%; accent-color: var(--signal); }
     .frame-box {
       border: 1px solid var(--line);
       background: var(--bg);
@@ -323,7 +309,7 @@
     .state-ok { color: var(--ok); font-weight: 500; }
     .state-fault { color: var(--signal); font-weight: 500; }
 
-    /* Project Specification Rows */
+    /* Project Rows & Deep-Dive Drawers */
     .proj-list { border-bottom: 1px solid var(--line); }
     .proj-item {
       display: grid;
@@ -331,14 +317,8 @@
       border-bottom: 1px solid var(--line);
     }
     .proj-item:last-child { border-bottom: none; }
-    .proj-idx {
-      padding: 24px 0 24px 24px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .proj-content {
-      padding: 22px 24px 24px 8px;
-    }
+    .proj-idx { padding: 24px 0 24px 24px; color: var(--muted); font-size: 12px; }
+    .proj-content { padding: 22px 24px 24px 8px; }
     .proj-head {
       display: flex;
       justify-content: space-between;
@@ -347,26 +327,12 @@
       flex-wrap: wrap;
       margin-bottom: 6px;
     }
-    .proj-title {
-      font-size: 16.5px;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-    }
-    .proj-title a {
-      color: var(--ink);
-      text-decoration: none;
-    }
+    .proj-title { font-size: 16.5px; font-weight: 600; letter-spacing: -0.015em; }
+    .proj-title a { color: var(--ink); text-decoration: none; }
     .proj-title a:hover { color: var(--signal); }
-    .proj-meta {
-      font-size: 11.5px;
-      color: var(--muted);
-    }
-    .proj-desc {
-      color: var(--ink-2);
-      font-size: 14px;
-      margin-bottom: 12px;
-      max-width: 68ch;
-    }
+    .proj-meta { font-size: 11.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+    .ci-dot { color: var(--ok); font-weight: 500; }
+    .proj-desc { color: var(--ink-2); font-size: 14px; margin-bottom: 12px; max-width: 68ch; }
     .proj-specs {
       display: flex;
       flex-wrap: wrap;
@@ -374,45 +340,72 @@
       font-size: 11.5px;
       color: var(--muted);
     }
-    .proj-specs span::before {
-      content: "▪ ";
-      color: var(--ink-2);
-    }
-    .proj-preview {
-      margin-top: 12px;
-    }
-    .proj-preview summary {
+    .proj-specs span::before { content: "▪ "; color: var(--ink-2); }
+
+    /* Technical Drawer inside Project */
+    .tech-drawer { margin-top: 12px; }
+    .tech-drawer summary {
       font-family: "IBM Plex Mono", monospace;
       font-size: 11.5px;
       color: var(--ink-2);
       cursor: pointer;
       user-select: none;
+      display: inline-block;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 1px;
     }
-    .proj-preview summary:hover { color: var(--signal); }
-    .proj-preview img {
+    .tech-drawer summary:hover { color: var(--signal); border-color: var(--signal); }
+    .drawer-box {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 14px 16px;
+      font-size: 12.5px;
+    }
+    .reg-mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      margin-top: 8px;
+    }
+    .reg-mini-table th, .reg-mini-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .reg-mini-table th { color: var(--muted); font-weight: 500; }
+    .reg-mini-table tr:last-child td { border-bottom: none; }
+    .drawer-links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 11.5px;
+    }
+    .drawer-links a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+    .drawer-links a:hover { color: var(--signal); }
+    .drawer-img {
       margin-top: 10px;
       width: 100%;
-      max-width: 640px;
+      max-width: 660px;
       border: 1px solid var(--line);
       display: block;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 740px) {
       .proj-item { grid-template-columns: 1fr; }
       .proj-idx { padding: 18px 20px 0; }
       .proj-content { padding: 6px 20px 20px; }
     }
 
-    /* Technical Notes / Stack Table */
+    /* Technical Disciplines Matrix */
     .matrix {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       border-bottom: 1px solid var(--line);
     }
-    .matrix-col {
-      padding: 20px 24px;
-      border-right: 1px solid var(--line);
-    }
+    .matrix-col { padding: 20px 24px; border-right: 1px solid var(--line); }
     .matrix-col:last-child { border-right: none; }
     .matrix-col h3 {
       font-size: 12px;
@@ -423,15 +416,9 @@
       margin-bottom: 10px;
       font-weight: 500;
     }
-    .matrix-col ul {
-      list-style: none;
-      font-size: 13.2px;
-      color: var(--ink-2);
-    }
-    .matrix-col li {
-      padding: 3px 0;
-    }
-    @media (max-width: 720px) {
+    .matrix-col ul { list-style: none; font-size: 13.2px; color: var(--ink-2); }
+    .matrix-col li { padding: 3px 0; }
+    @media (max-width: 740px) {
       .matrix { grid-template-columns: 1fr; }
       .matrix-col { border-right: none; border-bottom: 1px solid var(--line); padding: 18px 20px; }
       .matrix-col:last-child { border-bottom: none; }
@@ -448,74 +435,92 @@
     }
     footer a { color: var(--ink-2); text-decoration: none; }
     footer a:hover { color: var(--signal); }
-    @media (max-width: 720px) { footer { padding: 16px 20px; } }
+    @media (max-width: 740px) { footer { padding: 16px 20px; } }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lê Thanh Danh",
+    "url": "https://danhle23.github.io/",
+    "email": "mailto:danhle2305@gmail.com",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "VNUHCM - University of Science"
+    },
+    "jobTitle": "Digital IC, Embedded Firmware & Industrial Systems Engineer",
+    "sameAs": ["https://github.com/Danhle23"]
+  }
+  </script>
 </head>
 <body>
   <div class="sheet">
     <header class="topbar mono">
       <div class="brand">
         <a href="#" class="brand-name">Lê Thanh Danh</a>
-        <span class="brand-coord">10.7626° N, 106.6824° E · HCMUS</span>
+        <span class="brand-coord">HCMUS · 24DTV_DKD2</span>
       </div>
       <nav class="nav">
-        <a href="#work">Index</a>
-        <a href="#bench">Timing Bench</a>
-        <a href="#stack">Disciplines</a>
+        <a href="#work" data-i18n="nav_work">Work</a>
+        <a href="#bench" data-i18n="nav_bench">Lab Bench</a>
+        <a href="#stack" data-i18n="nav_stack">Disciplines</a>
         <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">CV.pdf ↗</a>
         <a href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub ↗</a>
-        <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch color scheme">CARBON</button>
+        <button class="util-btn" id="langToggle" type="button" aria-label="Switch language">VI</button>
+        <button class="util-btn" id="themeToggle" type="button" aria-label="Switch color scheme">CARBON</button>
       </nav>
     </header>
 
     <section class="intro">
       <div class="intro-main">
-        <h1>Digital IC, Embedded Firmware &amp; Industrial Telemetry.</h1>
-        <p class="intro-lead">
-          Third-year Electronics &amp; Telecommunications student at VNUHCM – University of Science.
-          I write synthesizable SystemVerilog RTL peripherals, deterministic zero-heap C++17 firmware
-          for noisy RS485/Modbus buses, and numerical simulation tools.
+        <h1 data-i18n="hero_title">Digital IC, Embedded Firmware &amp; Industrial Telemetry.</h1>
+        <p class="intro-lead" data-i18n="hero_lead">
+          Third-year Electronics &amp; Telecommunications student (Control &amp; Automation track) at VNUHCM – University of Science.
+          I design synthesizable SystemVerilog RTL peripherals, zero-heap C++17 firmware for noisy industrial RS485/Modbus buses,
+          and memory-safe systems verified under automated CI.
         </p>
         <div class="intro-links mono">
-          <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">Read Resume (1-Page PDF)</a>
+          <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener" data-i18n="cta_cv">Read Resume (1-Page PDF)</a>
           <a href="https://github.com/Danhle23" target="_blank" rel="noopener">github.com/Danhle23</a>
           <a href="mailto:danhle2305@gmail.com">danhle2305@gmail.com</a>
+          <button class="copy-btn" id="copyEmailBtn" type="button">COPY EMAIL</button>
         </div>
       </div>
 
       <div class="spec-table mono">
         <div class="spec-row">
-          <span class="spec-k">Affiliation</span>
-          <span class="spec-v">VNUHCM – Univ. of Science</span>
+          <span class="spec-k" data-i18n="sp_uni_k">University</span>
+          <span class="spec-v" data-i18n="sp_uni_v">VNUHCM – Univ. of Science</span>
         </div>
         <div class="spec-row">
-          <span class="spec-k">Department</span>
-          <span class="spec-v">Electronics &amp; Telecom (2024–2028)</span>
+          <span class="spec-k" data-i18n="sp_maj_k">Specialization</span>
+          <span class="spec-v" data-i18n="sp_maj_v">Electronics, Control &amp; Automation</span>
         </div>
         <div class="spec-row">
-          <span class="spec-k">Primary HDL</span>
-          <span class="spec-v">SystemVerilog (IEEE 1800-2012)</span>
+          <span class="spec-k">Silicon / HDL</span>
+          <span class="spec-v">SystemVerilog · AMBA APB3 · Verilator</span>
         </div>
         <div class="spec-row">
-          <span class="spec-k">Firmware</span>
-          <span class="spec-v">C / C++17 · STM32 · ESP-IDF · RTOS</span>
+          <span class="spec-k">Embedded</span>
+          <span class="spec-v">C / C++17 · STM32 · ESP-IDF · FreeRTOS</span>
         </div>
         <div class="spec-row">
-          <span class="spec-k">Base</span>
-          <span class="spec-v">Ho Chi Minh City, Vietnam</span>
+          <span class="spec-k" data-i18n="sp_loc_k">Location</span>
+          <span class="spec-v" data-i18n="sp_loc_v">Ho Chi Minh City, Vietnam</span>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Hardware Verification Workbench -->
+    <!-- Interactive 3-Mode Hardware & Signal Workbench -->
     <div class="sec-bar mono" id="bench">
-      <span>Interactive Hardware Bench</span>
-      <span>Cycle &amp; Wire-Level Inspection</span>
+      <span data-i18n="bench_hdr_l">Interactive Verification &amp; Signal Bench</span>
+      <span data-i18n="bench_hdr_r">RTL · Fieldbus · Digital Filtering</span>
     </div>
     <section class="bench">
       <div class="bench-tabs">
-        <button class="bench-tab active" data-pane="uart" type="button">01 / apb_uart.sv — Serial Frame &amp; Mid-Bit Strobe</button>
-        <button class="bench-tab" data-pane="modbus" type="button">02 / modbus_rtu.hpp — RS485 CRC-16 &amp; Phase Monitor</button>
+        <button class="bench-tab active" data-pane="uart" type="button">01 / apb_uart.sv — Timing &amp; Mid-Bit Strobe</button>
+        <button class="bench-tab" data-pane="modbus" type="button">02 / modbus_rtu.hpp — RS485 CRC-16 &amp; Faults</button>
+        <button class="bench-tab" data-pane="dsp" type="button">03 / dsp_filter — 50Hz Sensor Noise Attenuation</button>
       </div>
 
       <!-- Pane 1: UART Logic Analyzer -->
@@ -544,8 +549,8 @@
         </div>
 
         <div class="reg-strip mono">
-          <span id="uartRegReadout">APB 0x00 TXDATA = <code>0x5A</code> · LSB-first wire order: <code>0 1 0 1 1 0 1 0</code></span>
-          <span>▲ Marks <code>uart_rx.sv</code> mid-bit sample strobe (<code>clk_cnt == DIV/2</code>)</span>
+          <span id="uartRegReadout"></span>
+          <span>▲ <code>uart_rx.sv</code> mid-bit sample strobe (<code>clk_cnt == DIV/2</code>)</span>
         </div>
       </div>
 
@@ -572,14 +577,36 @@
           <div id="modbusFaultLine"></div>
         </div>
       </div>
+
+      <!-- Pane 3: DSP Sensor Noise Filter -->
+      <div class="bench-body" id="pane-dsp" style="display:none;">
+        <div class="slider-grid mono">
+          <div class="slider-box">
+            <div class="slider-head"><span>50Hz EMI Noise Amp</span><strong id="valNoise">0.45 V</strong></div>
+            <input id="slNoise" type="range" min="0.05" max="1.0" step="0.05" value="0.45" />
+          </div>
+          <div class="slider-box">
+            <div class="slider-head"><span>IIR Alpha (α)</span><strong id="valAlpha">0.14</strong></div>
+            <input id="slAlpha" type="range" min="0.04" max="0.60" step="0.02" value="0.14" />
+          </div>
+        </div>
+        <div class="wave-wrap">
+          <svg id="dspSvg" class="wave-svg" viewBox="0 0 760 128" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="reg-strip mono">
+          <span id="dspStats">y[n] = α·x[n] + (1−α)·y[n−1]</span>
+          <span>Dashed = Raw ADC + 50Hz EMI · Solid = Filtered Control Loop Feedback</span>
+        </div>
+      </div>
     </section>
 
-    <!-- Selected Engineering Index -->
+    <!-- Selected Engineering Work (5 Real Verified Repositories) -->
     <div class="sec-bar mono" id="work">
-      <span>Selected Engineering Work</span>
-      <span>RTL · Firmware · Numerical Systems</span>
+      <span data-i18n="work_hdr_l">Selected Engineering Work (5 Verified Repositories)</span>
+      <span data-i18n="work_hdr_r">Click [+] for Microarchitecture &amp; Specs</span>
     </div>
     <section class="proj-list">
+      <!-- Project 01 -->
       <article class="proj-item">
         <div class="proj-idx mono">01</div>
         <div class="proj-content">
@@ -589,23 +616,48 @@
                 AMBA APB3 UART SoC Peripheral IP Core ↗
               </a>
             </h2>
-            <span class="proj-meta mono">SystemVerilog · Verilator &amp; Icarus CI</span>
+            <span class="proj-meta mono"><span class="ci-dot">● CI Passing</span> · SystemVerilog</span>
           </div>
-          <p class="proj-desc">
-            Synthesizable memory-mapped UART slave peripheral for microcontroller interconnects.
-            Pairs deterministic TX/RX state machines (2-flop metastability synchronizer, false-start glitch rejection,
-            mid-bit sampling) with dual 16×8 circular FIFOs, programmable 16-bit baud divider, W1C parity/framing/overrun
-            status flags, and maskable interrupt output.
+          <p class="proj-desc" data-i18n="p1_desc">
+            Synthesizable memory-mapped UART slave peripheral for SoC interconnects. Integrates deterministic TX/RX
+            state machines (2-FF CDC synchronizer, false-start glitch rejection, mid-bit sampling) with dual 16×8
+            circular FIFOs, programmable 16-bit baud divider, W1C error registers, and maskable IRQ generation.
           </p>
           <div class="proj-specs mono">
-            <span>Zero-wait-state APB3 slave (0x00–0x14)</span>
+            <span>AMBA APB3 zero-wait-state slave</span>
             <span>Dual 16×8 sync FIFOs</span>
-            <span>Verilator -Wall clean</span>
-            <span>Automated GitHub Actions EDA regression</span>
+            <span>Verilator -Wall lint clean</span>
+            <span>Automated Icarus BFM regression</span>
           </div>
+          <details class="tech-drawer">
+            <summary>[+] Register Map (0x00–0x14) &amp; RTL Source Links</summary>
+            <div class="drawer-box mono">
+              <div>32-bit Word-Aligned APB3 Memory Map (<code>apb_uart.sv</code>):</div>
+              <table class="reg-mini-table">
+                <thead>
+                  <tr><th>Offset</th><th>Name</th><th>Access</th><th>Bitfield Specification</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>0x00</td><td>TXDATA</td><td>WO</td><td>[7:0] Push byte into 16-entry TX FIFO</td></tr>
+                  <tr><td>0x04</td><td>RXDATA</td><td>RO</td><td>[7:0] Pop oldest byte from 16-entry RX FIFO</td></tr>
+                  <tr><td>0x08</td><td>STATUS</td><td>RO/W1C</td><td>[7] rx_overrun, [6] framing_err, [5] parity_err, [4] tx_busy, [3:0] FIFO flags</td></tr>
+                  <tr><td>0x0C</td><td>CTRL</td><td>R/W</td><td>[6] loopback, [5:4] irq_en, [3:2] odd/even parity, [1:0] rx_en/tx_en</td></tr>
+                  <tr><td>0x10</td><td>BAUD_DIV</td><td>R/W</td><td>[15:0] Runtime clock divider (PCLK_HZ / BAUD_RATE)</td></tr>
+                  <tr><td>0x14</td><td>FIFO_LVL</td><td>RO</td><td>[15:8] rx_fifo_count (0..16), [7:0] tx_fifo_count (0..16)</td></tr>
+                </tbody>
+              </table>
+              <div class="drawer-links">
+                <a href="https://github.com/Danhle23/uart-controller/blob/main/apb_uart.sv" target="_blank" rel="noopener">apb_uart.sv ↗</a>
+                <a href="https://github.com/Danhle23/uart-controller/blob/main/sync_fifo.sv" target="_blank" rel="noopener">sync_fifo.sv ↗</a>
+                <a href="https://github.com/Danhle23/uart-controller/blob/main/apb_uart_tb.sv" target="_blank" rel="noopener">apb_uart_tb.sv ↗</a>
+                <a href="https://github.com/Danhle23/uart-controller/actions" target="_blank" rel="noopener">GitHub Actions EDA Log ↗</a>
+              </div>
+            </div>
+          </details>
         </div>
       </article>
 
+      <!-- Project 02 -->
       <article class="proj-item">
         <div class="proj-idx mono">02</div>
         <div class="proj-content">
@@ -615,24 +667,83 @@
                 Zero-Heap RS485 / Modbus-RTU Edge Gateway ↗
               </a>
             </h2>
-            <span class="proj-meta mono">Embedded C++17 · Industrial Telemetry</span>
+            <span class="proj-meta mono"><span class="ci-dot">● CI Passing</span> · Embedded C++17</span>
           </div>
-          <p class="proj-desc">
-            Deterministic C++17 firmware engine built to retrofit legacy 3-phase switchgear and cold-storage PLCs without
-            dynamic memory allocation. Uses a compile-time <code>constexpr</code> CRC-16 lookup table in ROM, an atomic
-            lock-free SPSC ring buffer for UART DMA interrupts, sliding-window EMI noise recovery, and 3-sample debounced fault latching.
+          <p class="proj-desc" data-i18n="p2_desc">
+            Deterministic C++17 firmware engine for retrofitting legacy 3-phase switchgear and cold-storage PLCs without
+            dynamic heap allocation. Features a compile-time constexpr CRC-16 table in Flash, atomic lock-free SPSC DMA
+            ring buffer, sliding-window EMI noise resynchronization, and 3-sample debounced fault latching.
           </p>
           <div class="proj-specs mono">
-            <span>0 bytes heap allocation (no malloc/new)</span>
-            <span>Lock-free SPSC DMA queue</span>
-            <span>24/24 strict -Werror unit checks</span>
-            <span>Python virtual PLC harness</span>
+            <span>0 B dynamic heap (no malloc/new)</span>
+            <span>Lock-free SPSC ISR queue</span>
+            <span>24/24 -Werror assertions</span>
+            <span>3-phase &amp; thermal protection</span>
           </div>
+          <details class="tech-drawer">
+            <summary>[+] Resource Constraints &amp; Concurrency Architecture</summary>
+            <div class="drawer-box mono">
+              <table class="reg-mini-table">
+                <thead>
+                  <tr><th>Constraint</th><th>Design Choice</th><th>Measured Outcome</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>RAM Fragmentation</td><td>Static templates &amp; stack snprintf JSON</td><td>0 heap allocations across infinite uptime</td></tr>
+                  <tr><td>UART DMA Concurrency</td><td>std::atomic acquire/release SPSC power-of-2 mask</td><td>Wait-free ISR push without masking interrupts</td></tr>
+                  <tr><td>RS485 Half-Duplex Glitches</td><td>1-byte sliding-window resync on CRC mismatch</td><td>Recovers cleanly after 0xFF/0x00 transceiver spikes</td></tr>
+                  <tr><td>Motor Inrush False Alarms</td><td>3-consecutive-sample hysteresis counter</td><td>Suppresses transient dips; latches real phase loss</td></tr>
+                </tbody>
+              </table>
+              <div class="drawer-links">
+                <a href="https://github.com/Danhle23/iiot-modbus-edge-gateway/blob/main/include/iiot/modbus_rtu.hpp" target="_blank" rel="noopener">modbus_rtu.hpp ↗</a>
+                <a href="https://github.com/Danhle23/iiot-modbus-edge-gateway/blob/main/include/iiot/ring_buffer.hpp" target="_blank" rel="noopener">ring_buffer.hpp ↗</a>
+                <a href="https://github.com/Danhle23/iiot-modbus-edge-gateway/blob/main/include/iiot/fault_monitor.hpp" target="_blank" rel="noopener">fault_monitor.hpp ↗</a>
+              </div>
+            </div>
+          </details>
         </div>
       </article>
 
+      <!-- Project 03: Newly Added Real University C++17 Team-Lead Project -->
       <article class="proj-item">
         <div class="proj-idx mono">03</div>
+        <div class="proj-content">
+          <div class="proj-head">
+            <h2 class="proj-title">
+              <a href="https://github.com/Danhle23/smart-campus-parking-cpp" target="_blank" rel="noopener">
+                Smart Campus Parking — Custom C++17 ADTs &amp; Rollback Engine ↗
+              </a>
+            </h2>
+            <span class="proj-meta mono"><span class="ci-dot">● ASan/UBSan Clean</span> · Team Lead (8)</span>
+          </div>
+          <p class="proj-desc" data-i18n="p3_desc">
+            Led an 8-member engineering team to build a deterministic C++17 campus routing and vehicle-relocation engine
+            from scratch without STL container shortcuts. Implemented custom Hash Tables, Binary Min-Heap Dijkstra routing,
+            Levenshtein edit-distance ANPR OCR recovery, and two-phase transactional narrow-lane rollback.
+          </p>
+          <div class="proj-specs mono">
+            <span>Custom Hash Table, Min-Heap, Stack, MergeSort</span>
+            <span>Two-phase state rollback</span>
+            <span>24/24 unit + ASan/UBSan zero-leak</span>
+            <span>29-page Typst engineering report</span>
+          </div>
+          <details class="tech-drawer">
+            <summary>[+] Custom Data Structures &amp; Memory Safety Proof</summary>
+            <div class="drawer-box mono">
+              <div>Built without <code>std::unordered_map</code>, <code>std::priority_queue</code>, <code>std::stack</code>, or <code>std::sort</code>:</div>
+              <div class="drawer-links">
+                <a href="https://github.com/Danhle23/smart-campus-parking-cpp/tree/main/include/ds" target="_blank" rel="noopener">Custom ADTs (include/ds/) ↗</a>
+                <a href="https://github.com/Danhle23/smart-campus-parking-cpp/blob/main/src/ParkingSystem.cpp" target="_blank" rel="noopener">Two-Phase Rollback (ParkingSystem.cpp) ↗</a>
+                <a href="https://github.com/Danhle23/smart-campus-parking-cpp/blob/main/output/pdf/BaoCao_DoAn11_SmartCampusParking_FINAL.pdf" target="_blank" rel="noopener">29-Page Technical Report (PDF) ↗</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Project 04 -->
+      <article class="proj-item">
+        <div class="proj-idx mono">04</div>
         <div class="proj-content">
           <div class="proj-head">
             <h2 class="proj-title">
@@ -642,25 +753,26 @@
             </h2>
             <span class="proj-meta mono">MATLAB R2026a · OOP AppBase</span>
           </div>
-          <p class="proj-desc">
-            Desktop scientific workbench separating UI controllers from 16 standalone numerical algorithms:
+          <p class="proj-desc" data-i18n="p4_desc">
+            6-Tab OOP desktop workbench separating UI layout controllers from 16 standalone numerical solver engines:
             Newton-Raphson, adaptive Banach fixed-point, Barycentric Lagrange interpolation, multi-model least squares,
             O(h⁴) finite-difference stencils, and composite Simpson 1/3 &amp; 3/8 integration.
           </p>
           <div class="proj-specs mono">
             <span>16 decoupled solver modules</span>
-            <span>25/25 automated verification checks</span>
-            <span>10⁻¹⁵ analytical benchmark agreement</span>
+            <span>25/25 automated verification tests</span>
+            <span>10⁻¹⁵ analytical precision agreement</span>
           </div>
-          <details class="proj-preview">
-            <summary>[+] Inspect MATLAB Workbench Interface</summary>
-            <img src="./assets/matlab_studio.png" alt="MATLAB Numerical Computing Studio interface" loading="lazy" />
+          <details class="tech-drawer">
+            <summary>[+] Inspect MATLAB Workbench Screenshot</summary>
+            <img class="drawer-img" src="./assets/matlab_studio.png" alt="MATLAB Numerical Computing Studio interface" loading="lazy" />
           </details>
         </div>
       </article>
 
+      <!-- Project 05 -->
       <article class="proj-item">
-        <div class="proj-idx mono">04</div>
+        <div class="proj-idx mono">05</div>
         <div class="proj-content">
           <div class="proj-head">
             <h2 class="proj-title">
@@ -670,23 +782,23 @@
             </h2>
             <span class="proj-meta mono">TypeScript · Next.js · Prisma</span>
           </div>
-          <p class="proj-desc">
-            Web telemetry tool that ingests e-commerce pricing histories to flag artificial pre-sale markups
-            and visualize real discount baselines over time.
+          <p class="proj-desc" data-i18n="p5_desc">
+            Full-stack e-commerce telemetry application tracking historical product pricing curves to flag artificial
+            pre-campaign price inflation and compute genuine baseline discounts.
           </p>
           <div class="proj-specs mono">
-            <span>Time-series ingestion pipeline</span>
-            <span>Synthetic markup detection</span>
-            <span>Responsive chart views</span>
+            <span>Time-series ingestion</span>
+            <span>Markup anomaly heuristics</span>
+            <span>Live at giathat.vercel.app</span>
           </div>
         </div>
       </article>
     </section>
 
-    <!-- Disciplines & Tooling -->
+    <!-- Disciplines & Laboratory Stack -->
     <div class="sec-bar mono" id="stack">
-      <span>Technical Disciplines</span>
-      <span>Laboratory &amp; Software Stack</span>
+      <span data-i18n="stack_hdr_l">Technical Disciplines</span>
+      <span data-i18n="stack_hdr_r">Silicon · Fieldbus · Signal &amp; Software</span>
     </div>
     <section class="matrix">
       <div class="matrix-col">
@@ -700,33 +812,33 @@
         </ul>
       </div>
       <div class="matrix-col">
-        <h3>Embedded &amp; Fieldbus</h3>
+        <h3>Embedded &amp; Control</h3>
         <ul>
           <li>Embedded C &amp; Zero-Heap C++17</li>
           <li>STM32 (HAL/LL) &amp; ESP32 (ESP-IDF)</li>
           <li>FreeRTOS Tasks, Queues &amp; Watchdog</li>
           <li>UART, SPI, I2C, RS485 / Modbus-RTU</li>
-          <li>Lock-Free Ring Buffers &amp; MQTT</li>
+          <li>ASan/UBSan Memory-Safe C++ ADTs</li>
         </ul>
       </div>
       <div class="matrix-col">
-        <h3>Math, DSP &amp; Tooling</h3>
+        <h3>DSP, Math &amp; Tooling</h3>
         <ul>
           <li>MATLAB (OOP App Designer, DSP)</li>
+          <li>Digital FIR/IIR Signal Filtering</li>
           <li>Python (NumPy, OpenCV, PySerial)</li>
           <li>TypeScript, Next.js, Prisma ORM</li>
-          <li>Linux / macOS Shell, Make, Git</li>
-          <li>GitHub Actions Automated CI</li>
+          <li>Linux / macOS Shell, CMake, Git CI</li>
         </ul>
       </div>
     </section>
 
     <footer class="mono">
-      <span>Lê Thanh Danh · Ho Chi Minh City</span>
+      <span>Lê Thanh Danh · VNUHCM – University of Science · Ho Chi Minh City</span>
       <span>
         <a href="./Le_Thanh_Danh_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
         <a href="https://github.com/Danhle23" target="_blank" rel="noopener">GitHub</a> ·
-        <a href="mailto:danhle2305@gmail.com">Email</a>
+        <a href="mailto:danhle2305@gmail.com">danhle2305@gmail.com</a>
       </span>
     </footer>
   </div>
@@ -737,24 +849,105 @@
       const root = document.documentElement;
       const btn = document.getElementById("themeToggle");
       const saved = localStorage.getItem("danh_theme");
-      if (saved === "carbon" || saved === "paper") {
-        root.setAttribute("data-theme", saved);
+      if (saved === "carbon" || saved === "paper") root.setAttribute("data-theme", saved);
+      function sync() {
+        btn.textContent = root.getAttribute("data-theme") === "paper" ? "CARBON" : "PAPER";
       }
-      function syncLabel() {
-        const cur = root.getAttribute("data-theme");
-        btn.textContent = cur === "paper" ? "CARBON" : "PAPER";
-      }
-      syncLabel();
+      sync();
       btn.addEventListener("click", function () {
         const next = root.getAttribute("data-theme") === "paper" ? "carbon" : "paper";
         root.setAttribute("data-theme", next);
         localStorage.setItem("danh_theme", next);
-        syncLabel();
+        sync();
         renderUartWaveform();
+        renderDspWaveform();
       });
     })();
 
-    // 2. Bench Tab Switching
+    // 2. Bilingual EN / VI Dictionary Switch
+    const I18N = {
+      en: {
+        nav_work: "Work",
+        nav_bench: "Lab Bench",
+        nav_stack: "Disciplines",
+        hero_title: "Digital IC, Embedded Firmware & Industrial Telemetry.",
+        hero_lead: "Third-year Electronics & Telecommunications student (Control & Automation track) at VNUHCM – University of Science. I design synthesizable SystemVerilog RTL peripherals, zero-heap C++17 firmware for noisy industrial RS485/Modbus buses, and memory-safe systems verified under automated CI.",
+        cta_cv: "Read Resume (1-Page PDF)",
+        sp_uni_k: "University",
+        sp_uni_v: "VNUHCM – Univ. of Science",
+        sp_maj_k: "Specialization",
+        sp_maj_v: "Electronics, Control & Automation",
+        sp_loc_k: "Location",
+        sp_loc_v: "Ho Chi Minh City, Vietnam",
+        bench_hdr_l: "Interactive Verification & Signal Bench",
+        bench_hdr_r: "RTL · Fieldbus · Digital Filtering",
+        work_hdr_l: "Selected Engineering Work (5 Verified Repositories)",
+        work_hdr_r: "Click [+] for Microarchitecture & Specs",
+        p1_desc: "Synthesizable memory-mapped UART slave peripheral for SoC interconnects. Integrates deterministic TX/RX state machines (2-FF CDC synchronizer, false-start glitch rejection, mid-bit sampling) with dual 16×8 circular FIFOs, programmable 16-bit baud divider, W1C error registers, and maskable IRQ generation.",
+        p2_desc: "Deterministic C++17 firmware engine for retrofitting legacy 3-phase switchgear and cold-storage PLCs without dynamic heap allocation. Features a compile-time constexpr CRC-16 table in Flash, atomic lock-free SPSC DMA ring buffer, sliding-window EMI noise resynchronization, and 3-sample debounced fault latching.",
+        p3_desc: "Led an 8-member engineering team to build a deterministic C++17 campus routing and vehicle-relocation engine from scratch without STL container shortcuts. Implemented custom Hash Tables, Binary Min-Heap Dijkstra routing, Levenshtein edit-distance ANPR OCR recovery, and two-phase transactional narrow-lane rollback.",
+        p4_desc: "6-Tab OOP desktop workbench separating UI layout controllers from 16 standalone numerical solver engines: Newton-Raphson, adaptive Banach fixed-point, Barycentric Lagrange interpolation, multi-model least squares, O(h⁴) finite-difference stencils, and composite Simpson 1/3 & 3/8 integration.",
+        p5_desc: "Full-stack e-commerce telemetry application tracking historical product pricing curves to flag artificial pre-campaign price inflation and compute genuine baseline discounts.",
+        stack_hdr_l: "Technical Disciplines",
+        stack_hdr_r: "Silicon · Fieldbus · Signal & Software"
+      },
+      vi: {
+        nav_work: "Dự án",
+        nav_bench: "Bàn đo Xung",
+        nav_stack: "Chuyên môn",
+        hero_title: "Thiết kế Vi mạch Số, Hệ thống Nhúng & Tự động hóa Công nghiệp.",
+        hero_lead: "Sinh viên năm 3 Khoa Điện tử – Viễn thông (hướng Điều khiển Tự động), Trường ĐH Khoa học Tự nhiên – ĐHQG-HCM. Tập trung thiết kế lõi IP SystemVerilog RTL chuẩn bus AMBA APB3, firmware C++17 không cấp phát động (Zero-Heap) cho mạng công nghiệp RS485/Modbus-RTU và các hệ thống tính toán kiểm chứng tự động.",
+        cta_cv: "Xem CV Chuẩn ATS (1 Trang PDF)",
+        sp_uni_k: "Trường",
+        sp_uni_v: "ĐH Khoa học Tự nhiên, ĐHQG-HCM",
+        sp_maj_k: "Chuyên ngành",
+        sp_maj_v: "Điện tử – Điều khiển Tự động",
+        sp_loc_k: "Khu vực",
+        sp_loc_v: "TP. Hồ Chí Minh, Việt Nam",
+        bench_hdr_l: "Bàn Kiểm Thử Xung Số & Tín Hiệu Trực Tuyến",
+        bench_hdr_r: "Vi mạch RTL · Modbus RS485 · Lọc nhiễu DSP",
+        work_hdr_l: "Danh Mục Dự Án Kỹ Thuật Trọng Điểm (5 Kho Mã Nguồn)",
+        work_hdr_r: "Bấm [+] xem Sơ đồ Thanh ghi & Kiến trúc",
+        p1_desc: "Khối IP ngoại vi UART chuẩn bus AMBA APB3 tổng hợp được trên phần cứng. Tích hợp máy trạng thái TX/RX (đồng bộ 2 tầng chống metastability, lọc xung nhiễu giả, lấy mẫu giữa bit) cùng 2 bộ đệm vòng 16×8 FIFO, thanh ghi chia Baud 16-bit, cờ lỗi W1C và ngắt cứng IRQ.",
+        p2_desc: "Nhân firmware C++17 tiền định giúp giám sát tủ điện 3 pha và kho lạnh công nghiệp qua RS485 mà không cấp phát bộ nhớ động (0 byte Heap). Tích hợp bảng CRC-16 constexpr lưu trong Flash, hàng đợi Lock-Free SPSC cho ngắt UART DMA và lọc chống dội cảnh báo mất pha/quá nhiệt.",
+        p3_desc: "Nhóm trưởng điều phối đội ngũ 8 thành viên xây dựng hệ thống điều phối bãi xe thông minh bằng C++17 thuần không dùng thư viện cấu trúc dữ liệu có sẵn. Tự hiện thực Hash Table, Dijkstra Binary Min-Heap, khôi phục biển số mờ bằng Levenshtein và cơ chế Rollback giao dịch 2 pha sạch lỗi ASan/UBSan.",
+        p4_desc: "Ứng dụng tính toán khoa học 6 phân hệ OOP tách biệt hoàn toàn giao diện khỏi 16 thuật toán giải tích số độc lập (Newton-Raphson, lặp Banach thích nghi, nội suy Lagrange trọng tâm, sai phân O(h⁴), tích phân Simpson 1/3 & 3/8), vượt qua 25/25 ca kiểm thử tự động.",
+        p5_desc: "Nền tảng thu thập chuỗi thời gian lịch sử giá thương mại điện tử nhằm phát hiện hành vi nâng giá khống trước đợt sale và đo lường mức giảm giá thực chất.",
+        stack_hdr_l: "Năng Lực Kỹ Thuật Cốt Lõi",
+        stack_hdr_r: "Vi mạch · Nhúng Công nghiệp · Tín hiệu & Phần mềm"
+      }
+    };
+
+    (function () {
+      const langBtn = document.getElementById("langToggle");
+      let curLang = localStorage.getItem("danh_lang") === "vi" ? "vi" : "en";
+      function applyLang(lang) {
+        const dict = I18N[lang];
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) el.textContent = dict[key];
+        });
+        langBtn.textContent = lang === "en" ? "VI" : "EN";
+        document.documentElement.lang = lang;
+      }
+      applyLang(curLang);
+      langBtn.addEventListener("click", function () {
+        curLang = curLang === "en" ? "vi" : "en";
+        localStorage.setItem("danh_lang", curLang);
+        applyLang(curLang);
+      });
+    })();
+
+    // 3. One-Click Copy Email
+    document.getElementById("copyEmailBtn").addEventListener("click", function () {
+      const btn = this;
+      navigator.clipboard.writeText("danhle2305@gmail.com").then(function () {
+        btn.textContent = "COPIED ✓";
+        setTimeout(function () { btn.textContent = "COPY EMAIL"; }, 1800);
+      });
+    });
+
+    // 4. Bench Tab Switching
     document.querySelectorAll(".bench-tab").forEach(function (tab) {
       tab.addEventListener("click", function () {
         document.querySelectorAll(".bench-tab").forEach(function (t) { t.classList.remove("active"); });
@@ -762,10 +955,12 @@
         const target = tab.getAttribute("data-pane");
         document.getElementById("pane-uart").style.display = target === "uart" ? "block" : "none";
         document.getElementById("pane-modbus").style.display = target === "modbus" ? "block" : "none";
+        document.getElementById("pane-dsp").style.display = target === "dsp" ? "block" : "none";
+        if (target === "dsp") renderDspWaveform();
       });
     });
 
-    // 3. Cycle-Accurate UART Waveform Renderer
+    // 5. Cycle-Accurate UART Waveform Renderer
     function parseHexByte(raw) {
       const clean = raw.trim().replace(/^0x/i, "");
       const val = parseInt(clean, 16);
@@ -778,10 +973,7 @@
       const byteVal = parseHexByte(document.getElementById("uartHex").value);
       const parityMode = document.getElementById("uartParity").value;
 
-      const bits = [];
-      bits.push({ label: "IDLE", v: 1, sample: false });
-      bits.push({ label: "START", v: 0, sample: true });
-
+      const bits = [{ label: "IDLE", v: 1, sample: false }, { label: "START", v: 0, sample: true }];
       let ones = 0;
       const lsbList = [];
       for (let i = 0; i < 8; i++) {
@@ -790,7 +982,6 @@
         lsbList.push(b);
         bits.push({ label: "D" + i, v: b, sample: true });
       }
-
       let ctrlHex = "0x03";
       if (parityMode === "even") {
         bits.push({ label: "PAR(E)", v: ones % 2, sample: true });
@@ -799,9 +990,7 @@
         bits.push({ label: "PAR(O)", v: (ones % 2) ^ 1, sample: true });
         ctrlHex = "0x0F";
       }
-
-      bits.push({ label: "STOP", v: 1, sample: true });
-      bits.push({ label: "IDLE", v: 1, sample: false });
+      bits.push({ label: "STOP", v: 1, sample: true }, { label: "IDLE", v: 1, sample: false });
 
       const styles = getComputedStyle(document.documentElement);
       const ink = styles.getPropertyValue("--trace-hi").trim() || "#141413";
@@ -809,40 +998,27 @@
       const line = styles.getPropertyValue("--line").trim() || "#d8d5cc";
       const signal = styles.getPropertyValue("--signal").trim() || "#c84b31";
 
-      const W = 760;
-      const padL = 56;
-      const padR = 14;
+      const W = 760, padL = 56, padR = 14;
       const slotW = (W - padL - padR) / bits.length;
-      const yHi = 52;
-      const yLo = 92;
+      const yHi = 52, yLo = 92;
 
-      let out = "";
-      // Signal labels
-      out += `<text x="8" y="25" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">PCLK</text>`;
+      let out = `<text x="8" y="25" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">PCLK</text>`;
       out += `<text x="8" y="76" fill="${ink}" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500">TXD</text>`;
 
-      // Sub-clock ticks along top
       let clkPath = `M ${padL} 28 `;
       const totalSubClks = bits.length * 4;
       const subW = (W - padL - padR) / totalSubClks;
       for (let c = 0; c < totalSubClks; c++) {
-        const x0 = padL + c * subW;
-        const xMid = x0 + subW * 0.5;
-        const x1 = x0 + subW;
+        const x0 = padL + c * subW, xMid = x0 + subW * 0.5, x1 = x0 + subW;
         clkPath += `L ${x0.toFixed(1)} 16 L ${xMid.toFixed(1)} 16 L ${xMid.toFixed(1)} 28 L ${x1.toFixed(1)} 28 `;
       }
       out += `<path d="${clkPath}" fill="none" stroke="${muted}" stroke-width="1" opacity="0.55"/>`;
 
-      // Bit guides + TXD digital waveform
       let path = "";
       for (let i = 0; i < bits.length; i++) {
-        const x0 = padL + i * slotW;
-        const x1 = x0 + slotW;
-        const xm = (x0 + x1) / 2;
+        const x0 = padL + i * slotW, x1 = x0 + slotW, xm = (x0 + x1) / 2;
         const y = bits[i].v ? yHi : yLo;
-
         out += `<line x1="${x0.toFixed(1)}" y1="38" x2="${x0.toFixed(1)}" y2="116" stroke="${line}" stroke-width="1" stroke-dasharray="2,2"/>`;
-
         if (i === 0) {
           path += `M ${x0.toFixed(1)} ${y} L ${x1.toFixed(1)} ${y} `;
         } else {
@@ -850,19 +1026,14 @@
           if (prevY !== y) path += `L ${x0.toFixed(1)} ${y} `;
           path += `L ${x1.toFixed(1)} ${y} `;
         }
-
-        // Bit header & logic level
         out += `<text x="${xm.toFixed(1)}" y="45" text-anchor="middle" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="9.5">${bits[i].label}</text>`;
         if (bits[i].label.startsWith("D") || bits[i].label.startsWith("PAR")) {
           out += `<text x="${xm.toFixed(1)}" y="${bits[i].v ? yHi + 15 : yLo - 7}" text-anchor="middle" fill="${ink}" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="500">${bits[i].v}</text>`;
         }
-
-        // Mid-bit RX sample marker
         if (bits[i].sample) {
           out += `<polygon points="${xm.toFixed(1)},100 ${(xm - 3.5).toFixed(1)},108 ${(xm + 3.5).toFixed(1)},108" fill="${signal}"/>`;
         }
       }
-
       out += `<path d="${path}" fill="none" stroke="${ink}" stroke-width="2"/>`;
       svg.innerHTML = out;
 
@@ -881,23 +1052,19 @@
       });
     });
 
-    // 4. Modbus-RTU CRC-16 (0xA001) & Fault Monitor Live Calculator
+    // 6. Modbus-RTU CRC-16 & Fault Monitor
     function crc16Modbus(bytes) {
       let crc = 0xFFFF;
       for (let i = 0; i < bytes.length; i++) {
         crc ^= bytes[i];
-        for (let b = 0; b < 8; b++) {
-          crc = (crc & 1) ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
-        }
+        for (let b = 0; b < 8; b++) crc = (crc & 1) ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
       }
       return crc & 0xFFFF;
     }
-
     function toInt16Bytes(val) {
       const v = val < 0 ? (0x10000 + val) : val;
       return [(v >> 8) & 0xFF, v & 0xFF];
     }
-
     function renderModbus() {
       const va = parseFloat(document.getElementById("slVa").value);
       const vc = parseFloat(document.getElementById("slVc").value);
@@ -908,20 +1075,11 @@
       document.getElementById("valVc").textContent = vc.toFixed(1) + " V";
       document.getElementById("valTemp").textContent = temp.toFixed(1) + " °C";
 
-      const regs = [
-        Math.round(va * 10),
-        Math.round(vb * 10),
-        Math.round(vc * 10),
-        Math.round(temp * 10)
-      ];
+      const regs = [Math.round(va * 10), Math.round(vb * 10), Math.round(vc * 10), Math.round(temp * 10)];
       const frame = [0x01, 0x03, 0x08];
-      regs.forEach(function (r) {
-        const pair = toInt16Bytes(r);
-        frame.push(pair[0], pair[1]);
-      });
+      regs.forEach(function (r) { const p = toInt16Bytes(r); frame.push(p[0], p[1]); });
       const crc = crc16Modbus(frame);
-      const crcLo = crc & 0xFF;
-      const crcHi = (crc >> 8) & 0xFF;
+      const crcLo = crc & 0xFF, crcHi = (crc >> 8) & 0xFF;
 
       const bodyHex = frame.map(function (x) { return x.toString(16).toUpperCase().padStart(2, "0"); }).join(" ");
       const crcHex = `<span class="crc-hi">${crcLo.toString(16).toUpperCase().padStart(2, "0")} ${crcHi.toString(16).toUpperCase().padStart(2, "0")}</span>`;
@@ -939,9 +1097,66 @@
         faultEl.innerHTML = `Status: <span class="state-fault">ALARM LATCHED → ${flags.join(" | ")}</span> · MQTT <code>{"alarm":true}</code>`;
       }
     }
-
     ["slVa", "slVc", "slTemp"].forEach(function (id) {
       document.getElementById(id).addEventListener("input", renderModbus);
+    });
+
+    // 7. DSP First-Order IIR Sensor Filter Simulator
+    function renderDspWaveform() {
+      const svg = document.getElementById("dspSvg");
+      const noiseAmp = parseFloat(document.getElementById("slNoise").value);
+      const alpha = parseFloat(document.getElementById("slAlpha").value);
+      document.getElementById("valNoise").textContent = noiseAmp.toFixed(2) + " V";
+      document.getElementById("valAlpha").textContent = alpha.toFixed(2);
+
+      const N = 140;
+      const raw = [], filt = [];
+      let y = 0;
+      let rawErrSq = 0, filtErrSq = 0;
+      for (let n = 0; n < N; n++) {
+        const clean = Math.sin((2 * Math.PI * n) / 70) * 0.85;
+        const hum50 = Math.sin((2 * Math.PI * n) / 5.5) * noiseAmp + Math.cos((2 * Math.PI * n) / 3.1) * (noiseAmp * 0.45);
+        const x = clean + hum50;
+        y = n === 0 ? x : alpha * x + (1 - alpha) * y;
+        raw.push(x);
+        filt.push(y);
+        rawErrSq += (x - clean) * (x - clean);
+        filtErrSq += (y - clean) * (y - clean);
+      }
+
+      const styles = getComputedStyle(document.documentElement);
+      const ink = styles.getPropertyValue("--trace-hi").trim() || "#141413";
+      const muted = styles.getPropertyValue("--muted").trim() || "#78766f";
+      const line = styles.getPropertyValue("--line").trim() || "#d8d5cc";
+      const signal = styles.getPropertyValue("--signal").trim() || "#c84b31";
+
+      const W = 760, H = 128, padL = 44, padR = 12;
+      const mapX = function (i) { return padL + (i / (N - 1)) * (W - padL - padR); };
+      const mapY = function (v) { return (H / 2) - v * 36; };
+
+      let out = `<line x1="${padL}" y1="${H / 2}" x2="${W - padR}" y2="${H / 2}" stroke="${line}" stroke-width="1"/>`;
+      out += `<text x="6" y="24" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">+1.5V</text>`;
+      out += `<text x="6" y="${H / 2 + 3}" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">0.0V</text>`;
+      out += `<text x="6" y="114" fill="${muted}" font-family="IBM Plex Mono, monospace" font-size="10">-1.5V</text>`;
+
+      let rawPath = "", filtPath = "";
+      for (let i = 0; i < N; i++) {
+        const cmd = i === 0 ? "M" : "L";
+        rawPath += `${cmd} ${mapX(i).toFixed(1)} ${mapY(raw[i]).toFixed(1)} `;
+        filtPath += `${cmd} ${mapX(i).toFixed(1)} ${mapY(filt[i]).toFixed(1)} `;
+      }
+      out += `<path d="${rawPath}" fill="none" stroke="${muted}" stroke-width="1.2" stroke-dasharray="2,2" opacity="0.75"/>`;
+      out += `<path d="${filtPath}" fill="none" stroke="${signal}" stroke-width="2.1"/>`;
+      svg.innerHTML = out;
+
+      const rmsRaw = Math.sqrt(rawErrSq / N);
+      const rmsFilt = Math.sqrt(filtErrSq / N);
+      const snrGain = 20 * Math.log10((rmsRaw + 1e-6) / (rmsFilt + 1e-6));
+      document.getElementById("dspStats").innerHTML =
+        `Difference Eq: <code>y[n] = ${alpha.toFixed(2)}·x[n] + ${(1 - alpha).toFixed(2)}·y[n−1]</code> · Noise RMS change: <code>${snrGain >= 0 ? "-" : "+"}${Math.abs(snrGain).toFixed(1)} dB</code>`;
+    }
+    ["slNoise", "slAlpha"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", renderDspWaveform);
     });
 
     renderUartWaveform();
